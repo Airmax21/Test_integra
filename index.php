@@ -1,6 +1,22 @@
 <?php include('master/header.php'); ?>
+<style>
+    .age-pink {
+      background-color: pink !important;
+    }
 
-<main class="container p-3">
+    .age-orange {
+      background-color: orange !important;
+    }
+
+    .age-green {
+      background-color: lightgreen !important;
+    }
+
+    .age-blue {
+      background-color: lightblue !important;
+    }
+  </style>
+<main class="p-3">
   <div class="row">
     <div class="col-md-12">
       <?php if (isset($message)) { ?>
@@ -47,6 +63,32 @@
               </select>
             </div>
           </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="pilihan">Tgl Lahir Mulai</label>
+              <input name="tgl_lahir_awal" type="date" class="form-control">
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="pilihan">Tgl Lahir Akhir</label>
+              <input name="tgl_lahir_akhir" type="date" class="form-control">
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label>Pendapatan Mulai</label>
+              <input type="text" class="form-control" id="nama" placeholder="Masukkan Pendapatan">
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label>Pendapatan Akhir</label>
+              <input type="text" class="form-control" id="nama" placeholder="Masukkan Pendapatan">
+            </div>
+          </div>
           <div class="col-lg-3">
             <div class="form-group">
               <br>
@@ -61,10 +103,10 @@
         </div>
         <div class="col-lg-6"></div>
         <div class="col-lg-2">
-          <button type="button" class="btn btn-primary">Refresh Data</button>
+          <button type="button" class="btn btn-primary" id="refresh_data">Refresh Data</button>
         </div>
         <div class="col-lg-2">
-          <button type="button" class="btn btn-success">Tambah Data</button>
+        <a href="edit_user.php"><button type="button" class="btn btn-success">Tambah Data</button></a>
         </div>
       </div>
       <br>
@@ -72,6 +114,7 @@
         <thead>
           <tr>
             <th data-sortable="false">No</th>
+            <th>Aksi</th>
             <th>Nama</th>
             <th>Provinsi</th>
             <th>Kabupaten</th>

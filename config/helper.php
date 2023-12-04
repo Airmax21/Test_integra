@@ -21,7 +21,7 @@ function insert($conn, $table, $data)
         die;
     }
 
-    $types = '';
+    $types = str_repeat('s', count($data));
     $stmt->bind_param($types, ...array_values($data));
 
     $stmt->execute();
@@ -48,6 +48,23 @@ function get($conn, $table, $params = null)
         $whereQuery .= "AND $key = '" . $conn->real_escape_string($val) . "'";
     }
     $query = "SELECT * FROM $table $whereQuery";
+    var_dump($query);
+    $getStmt = $conn->query($query);
+    if (!$getStmt) {
+        echo $query;
+        die("Error: " . $conn->error);
+    }
+
+    while ($row = $getStmt->fetch_assoc()) {
+        $result[] = $row;
+    }
+
+    return $result;
+}
+
+function query($conn, $query)
+{
+    $result = array();
     $getStmt = $conn->query($query);
     if (!$getStmt) {
         echo $query;
@@ -134,4 +151,21 @@ function delete($conn, $table, $where = null, $type = NULL)
     }
 
     return $deleteStmt;
+}
+
+function hitung_umur($date)
+{
+  $birthDate = new DateTime($date);
+  $today = new DateTime("today");
+  if ($birthDate > $today) {
+    exit("0 th 0 bln 0 hr");
+  }
+  $y = $today->diff($birthDate)->y;
+  $m = $today->diff($birthDate)->m;
+  $d = $today->diff($birthDate)->d;
+  return [
+    'y' => $y,
+    'm' => $m,
+    'd' => $d,
+  ];
 }

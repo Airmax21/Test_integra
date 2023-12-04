@@ -1,6 +1,6 @@
 <script>
     $(document).ready(function() {
-        $('#penduduk_table').DataTable({
+        var datatable = $('#penduduk_table').DataTable({
             paging: true, // Aktifkan paginasi
             searching: false, // Aktifkan fitur pencarian
             ordering: true, // Aktifkan fitur pengurutan
@@ -12,26 +12,78 @@
                     orderable: false
                 },
                 {
-                    targets: [1, 2, 3, 4],
+                    targets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
                     orderable: true
-                }, // Kolom 1 (Nama) dan 2 (Provinsi) dapat diurutkan
-                // ... Konfigurasi lainnya ...
-            ]// Pengurutan awal berdasarkan kolom indeks 1 (misalnya, kolom kedua) secara ascending
+                },
+            ],
+            ajax: {
+                url: 'ajax/getPenduduk.php', // Ganti dengan URL ke skrip PHP Anda
+                dataSrc: ''
 
-        });
-        getProvinsi();
-        penduduk_data();
-    });
+            },
+            columns: [{
+                    data: 'penduduk_id'
+                },
+                {
+                    data: 'aksi'
+                },
+                {
+                    data: 'nama_penduduk'
+                },
+                {
+                    data: 'propinsi'
+                },
+                {
+                    data: 'kabupaten'
+                },
+                {
+                    data: 'kecamatan'
+                },
+                {
+                    data: 'alamat'
+                },
+                {
+                    data: 'no_telp'
+                },
+                {
+                    data: 'tgl_lahir'
+                },
+                {
+                    data: 'pendapatan'
+                },
+                {
+                    data: 'tingkat_pendidikan'
+                },
+                {
+                    data: 'jenis_pekerjaan'
+                },
+                {
+                    data: 'keterangan'
+                }
+            ],
+            rowCallback: function(row, data) {
+                var age = parseInt(data.tahun);
 
-    function penduduk_data() {
-        $.ajax({
-            url: 'ajax/getPenduduk.php',
-            method: 'POST',
-            success: function(data) {
-                $('#penduduk_data').html(data);
+                if (age < 7) {
+                    $(row).addClass('age-pink');
+                } else if (age >= 7 && age <= 16) {
+                    $(row).addClass('age-orange');
+                } else if (age >= 17 && age <= 35) {
+                    $(row).addClass('age-green');
+                } else {
+                    $(row).addClass('age-blue');
+                }
             }
         });
-    }
+        datatable.columns.adjust().draw();
+        getProvinsi();
+        $('#refresh_data').click(function(e) {
+            e.preventDefault();
+            datatable.ajax.reload();
+        })
+    });
+
+
 
     function getProvinsi() {
         $.ajax({
@@ -43,6 +95,7 @@
             }
         });
     }
+
     function getKabupaten() {
         var id_prop = $('#provinsi').val();
         $.ajax({
