@@ -43,10 +43,10 @@ function get($conn, $table, $params = null)
     $result = array();
 
     $whereQuery = "WHERE 1 = 1 ";
-    if($params != null)
-    foreach ($params as $key => $val) {
-        $whereQuery .= "AND $key = '" . $conn->real_escape_string($val) . "'";
-    }
+    if ($params != null)
+        foreach ($params as $key => $val) {
+            $whereQuery .= "AND $key = '" . $conn->real_escape_string($val) . "'";
+        }
     $query = "SELECT * FROM $table $whereQuery";
     var_dump($query);
     $getStmt = $conn->query($query);
@@ -85,20 +85,20 @@ function update($conn, $table, $data, $where)
 
     $updateQuery = "UPDATE $table SET ";
     $dataQuery = [];
+
     foreach ($data as $key => $val) {
         $updateQuery .= "$key = ?, ";
-        array_push($dataQuery, $val);
+        $dataQuery[] = $val; // Tambahkan nilai ke dalam array
     }
 
     $whereQuery = "WHERE 1 = 1 ";
     foreach ($where as $key => $val) {
-        $whereQuery .= "AND $key = ?";
-        array_push($dataQuery, $val);
+        $whereQuery .= "AND $key = ? ";
+        $dataQuery[] = $val; // Tambahkan nilai ke dalam array
     }
 
-    $updateQuery .= $whereQuery;
-
-    $updateQuery = rtrim($updateQuery, ', ');
+    // Hapus tanda koma ekstra
+    $updateQuery = rtrim($updateQuery, ', ') . ' ' . $whereQuery;
 
     $updateStmt = $conn->prepare($updateQuery);
 
@@ -113,6 +113,7 @@ function update($conn, $table, $data, $where)
 
     return $updateStmt;
 }
+
 
 // DELETE
 function delete($conn, $table, $where = null, $type = NULL)
@@ -155,17 +156,17 @@ function delete($conn, $table, $where = null, $type = NULL)
 
 function hitung_umur($date)
 {
-  $birthDate = new DateTime($date);
-  $today = new DateTime("today");
-  if ($birthDate > $today) {
-    exit("0 th 0 bln 0 hr");
-  }
-  $y = $today->diff($birthDate)->y;
-  $m = $today->diff($birthDate)->m;
-  $d = $today->diff($birthDate)->d;
-  return [
-    'y' => $y,
-    'm' => $m,
-    'd' => $d,
-  ];
+    $birthDate = new DateTime($date);
+    $today = new DateTime("today");
+    if ($birthDate > $today) {
+        exit("0 th 0 bln 0 hr");
+    }
+    $y = $today->diff($birthDate)->y;
+    $m = $today->diff($birthDate)->m;
+    $d = $today->diff($birthDate)->d;
+    return [
+        'y' => $y,
+        'm' => $m,
+        'd' => $d,
+    ];
 }

@@ -9,7 +9,7 @@ include('master/header.php');
           <input type="hidden" name="penduduk_id" id="penduduk_id" value="<?= (isset($_GET['id'])?$_GET['id']:'') ?>">
           <div class="form-group">
             <label for="nama">Nama</label>
-            <input name="nama_penduduk" type="text" class="form-control" value="" placeholder="Tuliskan Nama" required>
+            <input name="nama_penduduk" id="nama_penduduk" type="text" class="form-control" value="" placeholder="Tuliskan Nama" required>
           </div>
           <div class="form-group">
             <label for="provinsi">Provinsi</label>
@@ -32,23 +32,23 @@ include('master/header.php');
           </div>
           <div class="form-group">
             <label for="no_telp">No Telp</label>
-            <input name="no_telp" type="tel" class="form-control" value="" placeholder="Tuliskan Nomor" required>
+            <input name="no_telp" id="no_telp" type="tel" class="form-control" value="" placeholder="Tuliskan Nomor" required>
           </div>
           <div class="form-group">
             <label for="tgl_lahir">Tanggal Lahir</label>
-            <input name="tgl_lahir" type="date" class="form-control" value="" required>
+            <input name="tgl_lahir" id="tgl_lahir" type="date" class="form-control" value="" required>
           </div>
           <div class="form-group">
             <label for="pendapatan">Pendapatan</label>
-            <input name="pendapatan" type="text" class="form-control" value="" placeholder="Tuliskan Pendapatan" required>
+            <input name="pendapatan" id="pendapatan" type="text" class="form-control" value="" placeholder="Tuliskan Pendapatan" required>
           </div>
           <div class="form-group">
             <label for="tingkat_pendidikan">Tingkat Pendidikan</label>
-            <input name="tingkat_pendidikan" type="text" class="form-control" value="" placeholder="Tuliskan Tingkat Pendidikan" required>
+            <input name="tingkat_pendidikan" id="tingkat_pendidikan" id="tingkat_pendidikan" type="text" class="form-control" value="" placeholder="Tuliskan Tingkat Pendidikan" required>
           </div>
           <div class="form-group">
             <label for="jenis_pekerjaan">Jenis Pekerjaan</label>
-            <input name="jenis_pekerjaan" type="text" class="form-control" value="" placeholder="Tuliskan Jenis Pekerjaan" required>
+            <input name="jenis_pekerjaan" id="jenis_pekerjaan" type="text" class="form-control" value="" placeholder="Tuliskan Jenis Pekerjaan" required>
           </div>
           <div class="form-group">
             <label for="keterangan">Keterangan</label>
@@ -64,6 +64,6 @@ include('master/header.php');
 </div>
 <?php
 include('master/footer.php');
-include '_js_form.php';
 include '_js.php';
+include '_js_form.php';
 ?>

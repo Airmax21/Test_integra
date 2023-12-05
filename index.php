@@ -1,34 +1,31 @@
 <?php include('master/header.php'); ?>
 <style>
-    .age-pink {
-      background-color: pink !important;
-    }
+  .age-pink {
+    background-color: pink !important;
+  }
 
-    .age-orange {
-      background-color: orange !important;
-    }
+  .age-orange {
+    background-color: orange !important;
+  }
 
-    .age-green {
-      background-color: lightgreen !important;
-    }
+  .age-green {
+    background-color: lightgreen !important;
+  }
 
-    .age-blue {
-      background-color: lightblue !important;
-    }
-  </style>
+  .age-blue {
+    background-color: lightblue !important;
+  }
+</style>
 <main class="p-3">
   <div class="row">
     <div class="col-md-12">
-      <?php if (isset($message)) { ?>
-        <div class="alert alert-<?= $message_type ?> alert-dismissible fade show" role="alert">
-          <?= $message ?>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <?php session_unset();
-      } ?>
-      <form id="pencarian" action="" method="post">
+      <div id="notif_flash" class="alert alert-dismissible fade" role="alert">
+        <span id="notif_flash_message">Data Berhasil Dihapus</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="pencarian" method="post">
         <div class="row">
           <div class="col-lg-2">
             <div class="form-group">
@@ -106,7 +103,7 @@
           <button type="button" class="btn btn-primary" id="refresh_data">Refresh Data</button>
         </div>
         <div class="col-lg-2">
-        <a href="edit_user.php"><button type="button" class="btn btn-success">Tambah Data</button></a>
+          <a href="edit_user.php"><button type="button" class="btn btn-success">Tambah Data</button></a>
         </div>
       </div>
       <br>
@@ -136,6 +133,7 @@
 </main>
 
 <?php
+include 'modal_delete.php';
 include('master/footer.php');
 include '_js.php';
 ?>
