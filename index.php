@@ -1,4 +1,7 @@
-<?php include('master/header.php'); ?>
+<?php include('master/header.php');
+session_set_cookie_params(360, '/', '.search.integra', false, true);
+session_start();
+?>
 <style>
   .age-pink {
     background-color: pink !important;
@@ -30,73 +33,73 @@
           <div class="col-lg-2">
             <div class="form-group">
               <label>Nama</label>
-              <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama">
+              <input type="text" class="form-control" id="nama" name="nama" value="<?= $_SESSION['nama'] ?>" placeholder="Masukkan Nama">
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label>Alamat</label>
-              <input type="text" class="form-control" id="alamat" placeholder="Masukkan Alamat">
+              <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $_SESSION['alamat'] ?>" placeholder="Masukkan Alamat">
             </div>
           </div>
           <div class="col-lg-3">
             <div class="form-group">
               <label for="pilihan">Provinsi</label>
-              <select class="form-control" id="provinsi" onchange="getKabupaten()">
+              <select class="form-control" id="provinsi" name="provinsi" onchange="getKabupaten()" value="<?= $_SESSION['provinsi'] ?>">
               </select>
             </div>
           </div>
           <div class="col-lg-3">
             <div class="form-group">
               <label for="pilihan">Kabupaten</label>
-              <select class="form-control" id="kabupaten" onchange="getKecamatan()">
+              <select class="form-control" id="kabupaten" name="kabupaten" onchange="getKecamatan()">
               </select>
             </div>
           </div>
           <div class="col-lg-3">
             <div class="form-group">
               <label for="pilihan">Kecamatan</label>
-              <select class="form-control" id="kecamatan">
+              <select class="form-control" id="kecamatan" name="kecamatan">
               </select>
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label for="pilihan">Tgl Lahir Mulai</label>
-              <input name="tgl_lahir_awal" type="date" class="form-control">
+              <input name="tgl_lahir_awal" type="date" class="form-control" value="<?= $_SESSION['tgl_lahir_awal'] ?>">
               </select>
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label for="pilihan">Tgl Lahir Akhir</label>
-              <input name="tgl_lahir_akhir" type="date" class="form-control">
+              <input name="tgl_lahir_akhir" type="date" class="form-control" value="<?= $_SESSION['tgl_lahir_akhir'] ?>">
               </select>
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label>Pendapatan Mulai</label>
-              <input type="text" class="form-control" id="nama" placeholder="Masukkan Pendapatan">
+              <input type="text" class="form-control" id="pendapatan_mulai" name="pendapatan_mulai" placeholder="Masukkan Pendapatan" value="<?= $_SESSION['pendapatan_mulai'] ?>">
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label>Pendapatan Akhir</label>
-              <input type="text" class="form-control" id="nama" placeholder="Masukkan Pendapatan">
+              <input type="text" class="form-control" id="pendapatan_akhir" name="pendapatan_akhir" placeholder="Masukkan Pendapatan" value="<?= $_SESSION['pendapatan_akhir'] ?>">
             </div>
           </div>
           <div class="col-lg-3">
             <div class="form-group">
               <br>
-              <button type="button" id="cari" class="btn btn-md btn-info">Cari</button>
+              <input type="submit" class="btn btn-md btn-info" value="Cari">
             </div>
           </div>
         </div>
       </form>
       <div class="row">
         <div class="col-lg-2">
-          <button type="button" class="btn btn-md btn-info">Cetak</button>
+          <a href="cetak_excel.php"><button type="button" class="btn btn-md btn-info">Cetak</button></a>
         </div>
         <div class="col-lg-6"></div>
         <div class="col-lg-2">
